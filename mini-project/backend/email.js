@@ -54,7 +54,6 @@ export async function sendTempleteToEmail(email, mytemplete){
 
 export async function getOpenGraph(prefer){
     const obj = {}
-    // const myaddress = myuser.prefer.filter((el)=>el.includes("http"))
     if (prefer.includes('http')){ 
         const html = await axios.get(prefer)
         const $ = cheerio.load(html.data)

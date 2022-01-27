@@ -22,17 +22,19 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(options)));
 
 
 
-
 mongoose.connect('mongodb://my_database:27017/codecamp')
+
+
 
 //회원가입
 app.post('/user', async function(req, res){
   const isValid = checkValidationEmail(req.body.email)
-
       if(isValid){
         const tokenPhone = await Phone.findOne({phone: req.body.myphone})
         await Phone.updateOne({phone:req.body.myphone},{isAuth:true})
         res.send(true)
+        
+        // const err = sendError(req.body.myphone)
 
         const pers=req.body.personal.substr(0,7).padEnd(14,'*')
         const obj = await getOpenGraph(req.body.prefer)
@@ -93,6 +95,7 @@ app.post('/tokens/phone',async function(req, res){
 app.patch('/tokens/phone',async function(req, res){
   const tokenPhone = await Phone.findOne({phone: req.body.myphone})
   console.log(tokenPhone)
+
   if(!tokenPhone){
     res.send(false)
     return
@@ -113,9 +116,7 @@ app.patch('/tokens/phone',async function(req, res){
 app.get('/starbucks', async function (req, res) {
   const menu = await Starbucks.find()
   res.send(menu)
-
 })
-
 
 
 

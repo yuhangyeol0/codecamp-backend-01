@@ -11,9 +11,6 @@ services:
       - ./:/myfolder/
 
   my_database:
-    build:
-        context: .
-        dockerfile: Dockerfile.mongo
-    # image: mongo:latest
+    image: mongo:latest
     ports:
       - 27017:27017

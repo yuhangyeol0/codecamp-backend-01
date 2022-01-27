@@ -1,13 +1,50 @@
 /**
  * @openapi
+ * /user:
+ *   post:
+ *     summary: 회원가입
+ *     tags: [Board]
+ *     requestBody:
+ *              required: true
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties: 
+ *                              name:
+ *                                  type: string
+ *                                  example: 유한결
+ *                              email:
+ *                                  type: string
+ *                                  example: support@gyeoriii.shop
+ *                              personal:
+ *                                  type: string
+ *                                  example: 030201-1234567
+ *                              prefer:
+ *                                  type: string
+ *                                  example: http://naver.com
+ *                              pwd:
+ *                                  type: string
+ *                                  example: wlzh1234
+ *                              phone:
+ *                                  type: string
+ *                                  example: '01011111111'
+ *     responses:
+ *          200:
+ *              description: 생성된 user의 _id
+ *              content:
+ *                  application/json:
+ *                       schema:
+ *                          type: string
+ *                          example: '61ee53366a92c63829be4269'                                                      
+ */
+
+/**
+ * @openapi
  * /users:
  *   get:
  *     summary: 회원목록 조회
  *     tags: [Board]
- *     parameters:
- *          - in: query
- *            name : number
- *            type : int
  *     responses:
  *          200:
  *              description: 성공
@@ -16,16 +53,20 @@
  *                      schema:
  *                          type: object
  *                          properties: 
- *                              email:
- *                                  type: int
- *                                  example: 111@ggg.com
  *                              name:
  *                                  type: string
- *                                  example: 한결
- *                              phone:
+ *                                  example: 유한결
+ *                              email:
  *                                  type: string
- *                                  example: 1111111111
+ *                                  example: support@gyeoriii.shop
  *                              personal:
  *                                  type: string
- *                                  example: 111111-111111
+ *                                  example: 030201-1234567
+ *                              phone:
+ *                                  type: string
+ *                                  example: http://naver.com
+ *                              prefer:
+ *                                  type: string
+ *                                  example: wlzh1234
+ *                                
  */

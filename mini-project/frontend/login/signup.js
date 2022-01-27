@@ -29,7 +29,9 @@ const submitSignup = async () => {
   let prefer = document.getElementById('SignupPrefer').value
   let phone2 = document.getElementById('PhoneNumber02').value
   let phone3 = document.getElementById('PhoneNumber03').value
-  const personal = personal1+personal2
+  
+  
+  const personal = personal1+'-'+personal2
   const myphone=`010${phone2}${phone3}`
 
   await axios.post("http://localhost:3001/user",{name, personal, email, passwd, prefer, myphone})
