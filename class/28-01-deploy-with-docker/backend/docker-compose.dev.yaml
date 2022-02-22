@@ -7,6 +7,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./src:/my_backend/src
+    env_file:
+      - ./.env.dev
     ports:
       - 3000:3000
 

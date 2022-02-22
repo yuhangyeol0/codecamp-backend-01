@@ -6,9 +6,8 @@ import { Injectable } from '@nestjs/common';
 export class JwtGoogleStrategy extends PassportStrategy(Strategy, 'google') {
   constructor() {
     super({
-      clientID:
-        '194644980740-5q8d0ru7h1k7a9fg91or76hi2iqrhl5g.apps.googleusercontent.com',
-      clientSecret: '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',
+      clientID: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_KEY,
       callbackURL: 'http://localhost:3000/login/google/callback',
       scope: ['email', 'profile'],
     });

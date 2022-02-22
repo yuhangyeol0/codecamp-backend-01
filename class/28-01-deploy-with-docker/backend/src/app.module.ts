@@ -27,10 +27,10 @@ import { ConfigModule } from '@nestjs/config';
     }), //
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: 'my_database',
       port: 3306,
       username: 'root',
-      password: 'wlzh1234',
+      password: 'root',
       database: 'myproject',
       entities: [__dirname + '/apis/**/*.entity.*'], //ts는 실제 실행될때 js로 저장됨
       synchronize: true,

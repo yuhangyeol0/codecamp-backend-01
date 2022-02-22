@@ -10,25 +10,24 @@ interface IFile {
 export class FileService {
   async upload({ files }: IFile) {
     const storage = new Storage({
-      keyFilename: 'hangyeol-e78136b738cc.json',
+      keyFilename: process.env.KEY_FILE_NAME,
       projectId: 'hangyeol',
-    })
-      .bucket('hangyeolyu')
-    
-      //일단 먼저 다 받기
-      const waitedFiles = await Promise.all(files)
-      //구글 스토리지에 동시에 모두 올려버리기
-      const results = await Promise.all(
-        waitedFiles.map((file)=>{
-          return new Promise((resolve, reject)=>{
-            file
+    }).bucket('hangyeolyu');
+
+    //일단 먼저 다 받기
+    const waitedFiles = await Promise.all(files);
+    //구글 스토리지에 동시에 모두 올려버리기
+    const results = await Promise.all(
+      waitedFiles.map((file) => {
+        return new Promise((resolve, reject) => {
+          file
             .createReadStream()
             .pipe(storage.file(file.filename).createWriteStream())
-            .on('finish',()=>resolve(`hangyeolyu/${file.filename}`))
-            .on('error',(error)=>reject(error))
-          })
-        })
-      )
+            .on('finish', () => resolve(`hangyeolyu/${file.filename}`))
+            .on('error', (error) => reject(error));
+        });
+      }),
+    );
     return results;
   }
 }
