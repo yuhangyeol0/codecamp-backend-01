@@ -1,0 +1,105 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type ProductAllergy {
+  id: String!
+  name: String!
+  products: [Product!]!
+}
+
+type ProductCategory {
+  id: String!
+  name: String!
+}
+
+type ProductIngredient {
+  id: String!
+  url: String!
+}
+
+type Product {
+  id: String!
+  ko_name: String!
+  en_name: String!
+  description: String
+  kal: Int
+  mg: Int
+  sugar: Int
+  fat: Int
+  protein: Int
+  price: Int!
+  productIngredient: ProductIngredient!
+  productCategory: ProductCategory!
+  productAllergies: [ProductAllergy!]!
+}
+
+type User {
+  id: String!
+  email: String!
+  name: String!
+  phonenumber: String!
+  signupdate: String!
+}
+
+type Query {
+  fetchProducts: [Product!]!
+  fetchProduct(productId: String!): Product!
+  fetchUsers: [User!]!
+  fetchUser(productId: String!): User!
+}
+
+type Mutation {
+  createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(updateProductInput: UpdateProductInput!, productId: String!): Product!
+  deleteProduct(productId: String!): Boolean!
+  restoreProduct(productId: String!): Boolean!
+  CreateProductCategory(name: String!): ProductCategory!
+  deleteProductCategory(productCategoryId: String!): Boolean!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!, productId: String!): User!
+  deleteUser(productId: String!): Boolean!
+}
+
+input CreateProductInput {
+  ko_name: String!
+  en_name: String!
+  description: String!
+  kal: Int!
+  mg: Int!
+  sugar: Int!
+  fat: Int!
+  protein: Int!
+  price: Int!
+  productIngredient: productingredientInput!
+  productCategoryId: String!
+  productAllergy: [String!]!
+}
+
+input productingredientInput {
+  url: String!
+}
+
+input UpdateProductInput {
+  ko_name: String!
+  en_name: String!
+  description: String
+  kal: Int
+  mg: Int
+  sugar: Int
+  fat: Int
+  protein: Int
+  price: Int!
+}
+
+input CreateUserInput {
+  email: String!
+  password: String!
+  name: String!
+  phonenumber: String!
+}
+
+input UpdateUserInput {
+  name: String!
+  phonenumber: String!
+}

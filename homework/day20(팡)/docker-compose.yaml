@@ -1,0 +1,26 @@
+version: '3.3'
+
+services:
+  my_backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src:/my_backend/src
+
+  my_database:
+    platform: linux/x86_64
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: 'homework'
+      MYSQL_ROOT_PASSWORD: '1q2w3e4r'
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+    cap_add:
+      - SYS_NICE
+    ports:
+      - 3306:3306

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그인/회원가입</title>
+    <!-- jQuery -->
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-1.12.4.min.js"
+    ></script>
+    <!-- iamport.payment.js -->
+    <script
+      type="text/javascript"
+      src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
+    ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      function mypayment() {
+        console.log("dddß");
+        const myAmount = Number(document.getElementById("aaa").value);
+        IMP.init("imp71807976"); // 예: imp00000000
+        IMP.request_pay(
+          {
+            // param
+            pg: "html5_inicis",
+            pay_method: "card",
+            merchant_uid: "ORD20180131-0000011",
+            name: "노르웨이 회전 의자",
+            amount: myAmount,
+            buyer_email: "gildong@gmail.com",
+            buyer_name: "홍길동",
+            buyer_tel: "010-4242-4242",
+            buyer_addr: "서울특별시 강남구 신사동",
+            buyer_postcode: "01181",
+          },
+          async function (rsp) {
+            // callback
+            if (rsp.success) {
+              alert("결제성공");
+              console.log("결제결과", rsp);
+              const data = await axios.post(
+                "http://localhost:3000/graphql",
+                {
+                  query: `mutation
+                {
+                  createPointTransaction(impUid:"${rsp.imp_uid}",amount:${rsp.paid_amount}){id}
+                }`,
+                },
+                {
+                  headers: {
+                    Authorization:
+                      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJvbmljbzA4MzBAZ29vZ2xlLmNvbSIsInN1YiI6IjU0OWNmODhhLTU1MmUtNGRiNC1hNWU2LTFhYjUwNjgxMTQzYSIsImlhdCI6MTY0NTA2MTYyMywiZXhwIjoxNjQ1MDY1MjIzfQ.59vZ41djrqWGb3RSLJlNI3gEbKwfn2zfPnXcf2Tlbl0",
+                  },
+                }
+              );
+              // ...,
+              // // 결제 성공 시 로직,
+              // ...
+            } else {
+              // ...,
+              // // 결제 실패 시 로직,
+              // ...
+            }
+          }
+        );
+      }
+    </script>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <!-- 전체 컨테이너 -->
+    <div class="Container">
+      <!-- 본 컨텐츠 -->
+      <div class="Wrapper">
+        <div class="LogoWrapper">
+          <img class="LogoImg" src="../img/starbucks.png" />
+          <div class="LogoTitle">CodeBucks</div>
+          <a href="../menu/index.html" class="Menu_Button"> 메뉴 바로가기</a>
+        </div>
+        <div id="SocialLoginGoogle">
+          <img class="SocialLoginButtonImg" src="../img/google.png" />
+          <a
+            class="SocialLoginButtonTitle"
+            href="http://localhost:3000/login/google/callback"
+            >구글로 로그인</a
+          >
+        </div>
+        <div id="SocialLoginNaver">
+          <img class="SocialLoginButtonImg" src="../img/naver.png" />
+          <a class="SocialLoginButtonTitle"
+          href="http://localhost:3000/login/naver/callback">네이버로 로그인</a>
+        </div>
+        <div id="SocialLoginKakao">
+          <img class="SocialLoginButtonImg" src="../img/kakao.png" />
+          <a class="SocialLoginButtonTitle"
+          href="http://localhost:3000/login/kakao/callback">카카오톡으로 로그인</a>
+        </div>
+        <div id="SocialLoginFacebook">
+          <img class="SocialLoginButtonImg" src="../img/facebook.png" />
+          <a class="SocialLoginButtonTitle">페이스북으로 로그인</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

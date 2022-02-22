@@ -1,0 +1,117 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: String!
+  email: String!
+  name: String!
+  age: Int!
+  point: Int!
+}
+
+type Allergy {
+  id: String!
+  name: String!
+  products: [Product!]!
+}
+
+type Payment {
+  id: String!
+  quantity: Int!
+  status: PAYMENT_STATUS_ENUM!
+  total: Int!
+  createdAt: DateTime!
+  user: User!
+}
+
+enum PAYMENT_STATUS_ENUM {
+  PAYMENT
+  READY
+  COMPLETE
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type MainCategory {
+  id: String!
+  name: String!
+}
+
+type SubCategory {
+  id: String!
+  name: String!
+  mainCategory: MainCategory!
+}
+
+type Product {
+  id: String!
+  name: String!
+  detail: String!
+  subCategory: SubCategory!
+  allergies: [Allergy!]!
+  price: Int!
+  size: Int!
+  amount: Int!
+  kcal: Int!
+  protein: Int!
+  fat: Int!
+  caffein: Int!
+  payments: Payment!
+}
+
+type PointTransaction {
+  id: String!
+  impUid: String
+  amount: Int!
+  status: POINT_TRANSACTION_STATUS_ENUM!
+}
+
+enum POINT_TRANSACTION_STATUS_ENUM {
+  PAYMENT
+  READY
+  CANCEL
+}
+
+type Query {
+  fetchUsers: [User!]!
+  fetchUser: User!
+  fetchProducts: [Product!]!
+  fetchProduct(productId: String!): Product!
+}
+
+type Mutation {
+  createUser(email: String!, password: String!, name: String!, age: Float!): User!
+  updateUser(email: String!, updateUserInput: UpdateUserInput!): User!
+  deleteUser(email: String!): Boolean!
+  createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
+  deleteProduct(productId: String!): Boolean!
+  restoreProduct(productId: String!): Boolean!
+  createPointTransaction(impUid: String!, amount: Float!): PointTransaction!
+  createSubCategory(name: String!): SubCategory!
+  login(email: String!, password: String!): String!
+  restoreAccessToken: String!
+}
+
+input UpdateUserInput {
+  email: String!
+  name: String!
+  age: Int!
+}
+
+input CreateProductInput {
+  name: String!
+  detail: String!
+  price: Int!
+  subCategoryId: String!
+  allergies: [String!]!
+}
+
+input UpdateProductInput {
+  name: String!
+  detail: String!
+}
