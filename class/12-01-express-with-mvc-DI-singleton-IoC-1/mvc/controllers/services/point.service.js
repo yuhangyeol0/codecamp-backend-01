@@ -1,9 +1,0 @@
-export class PointService{
-    checkValue=()=>{
-        console.log(" 포인트 검증  ")
-        //1. 가진 포인트 검증하는 코드(10줄)
-        // ...
-        // ...
-        // ... 
-    }
-}

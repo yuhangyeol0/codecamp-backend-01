@@ -1,0 +1,10 @@
+steps:
+  - name: ubuntu
+    args:
+      - echo
+      - hello
+
+  - name: ubuntu
+    args:
+      - echo
+      - hello123123

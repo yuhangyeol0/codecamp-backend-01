@@ -1,9 +1,0 @@
-export class ProductService{
-    checkSoldout=()=>{
-        console.log(" 판매완료 검증 ")
-        //2. 판매여부 검증하는 코드(10줄)
-        // ...
-        // ...
-        // ...
-    }
-}

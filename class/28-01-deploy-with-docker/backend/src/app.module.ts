@@ -8,8 +8,8 @@ import { UserModule } from './apis/user/user.module';
 import { AuthModule } from './apis/auth/auth.module';
 import { PointTransactionModule } from './apis/pointTransaction/pointTransaction.module';
 import { FileModule } from './apis/file/file.module';
-// import { AppController } from './app.controller';
-// import { AppService } from './app.service';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
@@ -24,21 +24,22 @@ import { ConfigModule } from '@nestjs/config';
     GraphQLModule.forRoot({
       autoSchemaFile: 'src/common/graphql/schema.gql',
       context: ({ req, res }) => ({ req, res }),
+      playground:false,
     }), //
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'my_database',
+      host: 'mydatabase.gyeoriii.shop',
       port: 3306,
       username: 'root',
       password: 'root',
       database: 'myproject',
       entities: [__dirname + '/apis/**/*.entity.*'], //ts는 실제 실행될때 js로 저장됨
-      synchronize: true,
+      synchronize: false,
       logging: true,
     }),
     ConfigModule.forRoot({ isGlobal: true }),
   ],
-  // controllers: [AppController],
-  // providers: [AppService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
