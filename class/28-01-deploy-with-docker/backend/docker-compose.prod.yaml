@@ -3,7 +3,7 @@ version: '3.3'
 services:
   my_backend:
     platform: linux/x86_64
-    image: asia.gcr.io/hangyeol/my_backend:1.9
+    image: asia.gcr.io/hangyeol/my_backend:2.0
     build:
       context: .
       dockerfile: Dockerfile
