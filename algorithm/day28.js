@@ -46,3 +46,46 @@ function solution(dartResult) {
   }
   return sum;
 }
+
+//메소드
+const bouns = ["S", "D", "T"];
+function solution(dartResult) {
+  let score = "";
+  let currentValue = 0;
+  let last = false;
+  const answer = dartResult
+    .split("")
+    .reduce((acc, cur, i) => {
+      if (isNaN(cur) === false) {
+        score += cur;
+      } else if (bouns.includes(score)) {
+        score = Number(score);
+        const squared = bouns.indexOf(cur) + 1;
+
+        currentValue = score ** squared;
+        score = "";
+
+        if (isNaN(dartResult[i + 1]) === false) {
+          last = true;
+        }
+      } else {
+        last = true;
+        if (cur === "*") {
+          currentValue *= 2;
+          if (acc.length > 0) {
+            acc[acc.length - 1] * 2;
+          } else {
+            currentValue *= -1;
+          }
+        }
+      }
+      if (last) {
+        acc.push(currentValue);
+      }
+      return acc;
+    }, [])
+    .reduce((acc, cur) => {
+      return acc + cur;
+    }, 0);
+  return answer;
+}

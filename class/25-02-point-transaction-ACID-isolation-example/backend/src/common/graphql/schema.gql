@@ -1,0 +1,16 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Payment {
+  id: String!
+  amount: Int!
+}
+
+type Query {
+  fetchPayment: [Payment!]!
+}
+
+type Mutation {
+  createPayment(amount: Float!): Payment!
+}

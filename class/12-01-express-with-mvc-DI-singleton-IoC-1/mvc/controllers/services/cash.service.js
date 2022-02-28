@@ -1,0 +1,9 @@
+export class CashService{
+    checkValue=()=>{
+        console.log(" 현금 검증  ")
+        //1. 가진 돈 검증하는 코드(10줄)
+        // ...
+        // ...
+        // ... 
+    }
+}

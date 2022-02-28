@@ -1,0 +1,10 @@
+{
+  "name": "02-06-welcome-templete-create-user-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "node index.js"
+  }
+}
